@@ -30,5 +30,34 @@
  * @returns {{ tipPercentage: number, tipAmount: number, totalAmount: number } | null}
  */
 export function calculateTip(billAmount, serviceRating) {
-  // Your code here
+  // Your code here  
+  if (Number.isNaN(billAmount) || !Number.isInteger(serviceRating)) return null;
+  if (billAmount <= 0 || serviceRating < 1 || serviceRating > 5) return null;
+
+  let tipPercentage = 0;
+  switch (serviceRating) {
+    case 1 :
+      tipPercentage = 5;
+      break;
+    case 2 :
+      tipPercentage = 10;
+      break; 
+    case 3 :
+      tipPercentage = 15;
+      break; 
+    case 4 :
+      tipPercentage = 20;
+      break; 
+    default :
+      tipPercentage = 25;
+  }
+  let tipAmount = Number.parseFloat(billAmount*(tipPercentage/100));
+  let totalAmount = Number.parseFloat(billAmount + tipAmount);
+
+  return {
+    tipPercentage: tipPercentage,
+    tipAmount: tipAmount,
+    totalAmount: totalAmount,
+  }
+
 }

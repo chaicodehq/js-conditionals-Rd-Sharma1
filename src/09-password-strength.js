@@ -27,4 +27,37 @@
  */
 export function checkPasswordStrength(password) {
   // Your code here
+
+  // let passwordScore = 0;
+  // let upperFlag = false;
+  // let lowerFlag = false;
+  // let speacialFlag = false;
+  // let numFlag = false;
+
+  // for (char in password) {
+  //   let charASCII = char.charCodeAt(0);
+  //   if (charASCII <= 90 && charASCII >= 65) upperFlag = true;
+  //   else if (charASCII <= 122 && charASCII >= 97) lowerFlag = true;
+  //   else if (charASCII <= 122 && charASCII >= 97) lowerFlag = true;
+  //   else if ([]) lowerFlag = true;
+    
+  // }
+  if (!password || typeof password !== "string") return "weak";
+
+  const checks = [
+    password.length >= 8,                    
+    /[A-Z]/.test(password),                  
+    /[a-z]/.test(password),                  
+    /[0-9]/.test(password),                  
+    /[!@#$%^&*()_+\-=[\]{}|;:,.<>?]/.test(password) 
+  ];
+
+    const score = checks.filter(val => val).length;
+
+  if (score <= 1) return "weak";
+  if (score <= 3) return "medium";
+  if (score === 4) return "strong";
+  return "very strong";
 }
+  
+
